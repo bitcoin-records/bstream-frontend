@@ -39,7 +39,7 @@ const ArtistLabel = styled.span`
 
 
 
-function TrackList({ loading, error, tracks }) {
+function TrackList({ loading, error, tracks, onTrackSelected }) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -53,13 +53,15 @@ function TrackList({ loading, error, tracks }) {
 
   if (tracks !== false) {
     return <div>
-      {_.map(tracks, (track) => (<TrackItem key={track.id}>
-        <AlbumImg src={_.get(track, 'album.images[0].url')} alt="react-boilerplate - Logo" /><br />
-        <SongInfo>
-          <SongTitleLabel>{track.name}</SongTitleLabel><br />
-          <ArtistLabel>{_.get(track, 'artists.[0].name')}</ArtistLabel>
-        </SongInfo>
-      </TrackItem>))}
+      {_.map(tracks, (track) => (
+        <TrackItem key={track.id} onClick={(e) => { onTrackSelected(track); }}>
+          <AlbumImg src={_.get(track, 'album.images[0].url')} alt="react-boilerplate - Logo" /><br />
+          <SongInfo>
+            <SongTitleLabel>{track.name}</SongTitleLabel><br />
+            <ArtistLabel>{_.get(track, 'artists.[0].name')}</ArtistLabel>
+          </SongInfo>
+        </TrackItem>
+      ))}
     </div>;
   }
 
@@ -70,6 +72,7 @@ TrackList.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.any,
   tracks: PropTypes.any,
+  onTrackSelected: PropTypes.func,
 };
 
 export default TrackList;

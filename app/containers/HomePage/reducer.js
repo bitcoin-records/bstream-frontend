@@ -13,6 +13,7 @@ import { fromJS } from 'immutable';
 
 import {
   CHANGE_USERNAME,
+  SELECT_TRACK,
 } from './constants';
 
 // The initial state of the App
@@ -27,6 +28,9 @@ function homeReducer(state = initialState, action) {
       // Delete prefixed '@' from the github username
       return state
         .set('username', action.name.replace(/@/gi, ''));
+    case SELECT_TRACK:
+      return state
+        .set('selectedTrack', action.track);
     default:
       return state;
   }

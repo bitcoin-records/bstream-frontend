@@ -25,7 +25,7 @@ import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 import { loadRepos, loadTracks } from '../App/actions';
-import { changeUsername } from './actions';
+import { changeUsername, selectTrack } from './actions';
 import { makeSelectUsername } from './selectors';
 import splashImg from './splash.jpg';
 
@@ -108,7 +108,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
                 />
               </Form>
             </CenteredSection>
-            <TrackList {...trackListProps} />
+            <TrackList {...trackListProps} onTrackSelected={(track) => { this.props.onTrackSelected(track); }} />
           </Section>
         </div>
       </article>
@@ -133,6 +133,7 @@ HomePage.propTypes = {
   onSubmitForm: React.PropTypes.func,
   username: React.PropTypes.string,
   onChangeSearchQuery: React.PropTypes.func,
+  onTrackSelected: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -141,6 +142,9 @@ export function mapDispatchToProps(dispatch) {
     onSubmitForm: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadTracks());
+    },
+    onTrackSelected: (track) => {
+      dispatch(selectTrack(track));
     },
   };
 }

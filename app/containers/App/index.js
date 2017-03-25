@@ -13,6 +13,11 @@ import styled from 'styled-components';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import withProgressBar from 'components/ProgressBar';
+import _ from 'lodash';
+
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectSelectedTrack } from 'containers/HomePage/selectors';
 
 const AppWrapper = styled.div`
   margin: 0 auto;
@@ -33,6 +38,9 @@ export function App(props) {
       />
       <Header />
       {React.Children.toArray(props.children)}
+      <span>
+        Selected Track: {_.get(props.selectedTrack, 'name')}
+      </span>
       <Footer />
     </AppWrapper>
   );
@@ -40,6 +48,15 @@ export function App(props) {
 
 App.propTypes = {
   children: React.PropTypes.node,
+  selectedTrack: React.PropTypes.object,
 };
 
-export default withProgressBar(App);
+const mapStateToProps = createStructuredSelector({
+  selectedTrack: makeSelectSelectedTrack(),
+});
+
+// export default withProgressBar(App);
+
+// Wrap the component to inject dispatch and state into it
+export default connect(mapStateToProps)(withProgressBar(App));
+

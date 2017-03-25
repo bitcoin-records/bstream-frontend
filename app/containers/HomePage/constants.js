@@ -10,3 +10,4 @@
  */
 
 export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
+export const SELECT_TRACK = 'boilerplate/Home/SELECT_TRACK';
