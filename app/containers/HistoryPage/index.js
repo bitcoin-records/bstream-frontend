@@ -6,26 +6,18 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Link } from 'react-router';
 
 import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import Button from 'components/Button';
-import ReposList from 'components/ReposList';
-import AtPrefix from './AtPrefix';
-import CenteredSection from './CenteredSection';
-import Form from './Form';
 import Input from './Input';
-import Section from './Section';
-import messages from './messages';
+import CenteredSection from './CenteredSection';
 import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
 
-export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class HistoryPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
    * when initial state username is not null, submit the form to load repos
    */
@@ -61,41 +53,25 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             </p>
           </CenteredSection>
           <CenteredSection>
-            <Link to="/register">
-              <Button>Getting Started</Button>
-            </Link>  
+            <label>Your History</label><br />
+            <ul>
+              <li>
+                <span>Sia</span>
+                <span>1 BTC</span>
+              </li>
+              <li>
+                <span>Radiohead</span>
+                <span>2 BTC</span>
+              </li>
+            </ul>
           </CenteredSection>
-          <CenteredSection>
-            {/* Mock sound player here */}
-          </CenteredSection>
-          <Section>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-            <Form onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <AtPrefix>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </AtPrefix>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </Form>
-            <ReposList {...reposListProps} />
-          </Section>
         </div>
       </article>
     );
   }
 }
 
-HomePage.propTypes = {
+RegisterPage.propTypes = {
   loading: React.PropTypes.bool,
   error: React.PropTypes.oneOfType([
     React.PropTypes.object,
@@ -106,7 +82,6 @@ HomePage.propTypes = {
     React.PropTypes.bool,
   ]),
   onSubmitForm: React.PropTypes.func,
-  username: React.PropTypes.string,
   onChangeUsername: React.PropTypes.func,
 };
 
@@ -122,10 +97,9 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
-  username: makeSelectUsername(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryPage);
