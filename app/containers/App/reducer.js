@@ -19,6 +19,7 @@ import {
   LOAD_TRACKS_SUCCESS,
   LOAD_TRACKS,
   LOAD_TRACKS_ERROR,
+  SELECT_TRACK,
 } from './constants';
 
 // The initial state of the App
@@ -63,6 +64,9 @@ function appReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+    case SELECT_TRACK:
+      return state
+        .set('selectedTrack', action.track);
     default:
       return state;
   }

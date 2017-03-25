@@ -24,8 +24,8 @@ import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos, loadTracks } from '../App/actions';
-import { changeSearchString, selectTrack } from './actions';
+import { loadRepos, loadTracks, selectTrack } from '../App/actions';
+import { changeSearchString } from './actions';
 import { makeSelectUsername } from './selectors';
 import splashImg from './splash.jpg';
 
@@ -38,7 +38,7 @@ const BannerSection = styled(CenteredSection)`
 `;
 
 const BannerOverlay = styled(CenteredSection)`
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(50,50,50,0.8);
   padding: 60px 60px;
   min-height: 80vh;
 `;

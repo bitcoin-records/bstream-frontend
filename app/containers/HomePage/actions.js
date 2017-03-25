@@ -18,7 +18,6 @@
 import {
   CHANGE_USERNAME,
   CHANGE_SEARCHSTRING,
-  SELECT_TRACK,
 } from './constants';
 
 /**
@@ -42,10 +41,3 @@ export function changeSearchString(searchString) {
   };
 }
 
-
-export function selectTrack(track) {
-  return {
-    type: SELECT_TRACK,
-    track,
-  };
-}

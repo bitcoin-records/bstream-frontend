@@ -24,7 +24,7 @@ import TrackList from 'components/TrackList';
 import SearchForm from './SearchForm';
 import Input from './Input';
 // import Section from './Section';
-import { loadTracks } from '../App/actions';
+import { loadTracks, selectTrack } from '../App/actions';
 import { changeSearchString } from './actions';
 import { makeSelectSearchString } from './selectors';
 
@@ -108,7 +108,7 @@ export function mapDispatchToProps(dispatch) {
     },
     onTrackSelected: (track) => {
       //TODO change
-      //dispatch(selectTrack(track));
+      dispatch(selectTrack(track));
     },
   };
 }

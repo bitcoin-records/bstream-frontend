@@ -18,7 +18,7 @@ import ReactAudioPlayer from 'react-audio-player'
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectSelectedTrack } from 'containers/HomePage/selectors';
+import { makeSelectSelectedTrack } from './selectors';
 
 const AppWrapper = styled.div`
   margin: 0 auto;

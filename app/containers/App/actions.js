@@ -22,6 +22,7 @@ import {
   LOAD_TRACKS,
   LOAD_TRACKS_SUCCESS,
   LOAD_TRACKS_ERROR,
+  SELECT_TRACK,
 } from './constants';
 
 /**
@@ -99,5 +100,12 @@ export function trackLoadingError(error) {
   return {
     type: LOAD_TRACKS_ERROR,
     error,
+  };
+}
+
+export function selectTrack(track) {
+  return {
+    type: SELECT_TRACK,
+    track,
   };
 }
