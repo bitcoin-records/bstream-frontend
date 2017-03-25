@@ -11,8 +11,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router';
 import { FaMusic } from 'react-icons/lib/fa';
+import styled from 'styled-components';
 
 import { makeSelectRepos, makeSelectLoading, makeSelectError, makeSelectTracks } from 'containers/App/selectors';
+import H1 from 'components/H1';
 import H2 from 'components/H2';
 import Button from 'components/Button';
 import TrackList from 'components/TrackList';
@@ -25,6 +27,27 @@ import messages from './messages';
 import { loadRepos, loadTracks } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
+import splashImg from './splash.jpg';
+
+
+const BannerSection = styled(CenteredSection)`
+  background-size: cover;
+  color: white;
+  min-height: 80vh;
+  margin-top: -100px;
+`;
+
+const BannerOverlay = styled(CenteredSection)`
+  background-color: rgba(0,0,0,0.5);
+  padding: 60px 60px;
+  min-height: 80vh;
+`;
+
+const WhiteButton = styled(Button)`
+  color: white;
+  border-color: white;
+`;
+
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -37,11 +60,15 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   }
 
   render() {
+
     const { loading, error, tracks } = this.props;
     const trackListProps = {
       loading,
       error,
       tracks: _.get(tracks, 'tracks.items'),
+    };
+    const bannerStyle = {
+      backgroundImage: 'url(' + splashImg + ')',
     };
 
     return (
@@ -53,35 +80,34 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           ]}
         />
         <div>
-          <CenteredSection>
-            <H2>
-              BSTREAM <FaMusic />
-            </H2>
-            <p>
-              Stream music and support artists you love.
-            </p>
-          </CenteredSection>
-          <CenteredSection>
-            <Link to="/register">
-              <Button>Getting Started</Button>
-            </Link>  
-          </CenteredSection>
-          <CenteredSection>
-            {/* Mock sound player here */}
-          </CenteredSection>
+          <BannerSection style={bannerStyle}>
+            <BannerOverlay>
+              <H1>
+                BSTREAM <FaMusic />
+              </H1>
+              <p>
+                Stream music and support artists you love.
+              </p>
+              <Link to="/register">
+                <WhiteButton>Getting Started</WhiteButton>
+              </Link> 
+            </BannerOverlay>
+          </BannerSection>
           <Section>
-            <H2>
-              Look for Songs
-            </H2>
-            <Form onSubmit={this.props.onSubmitForm}>
-              <Input
-                id="username"
-                type="text"
-                placeholder="Song title, artist, album..."
-                value={this.props.username}
-                onChange={this.props.onChangeSearchQuery}
-              />
-            </Form>
+            <CenteredSection>
+              <H2>
+                Look for Songs
+              </H2>
+              <Form onSubmit={this.props.onSubmitForm}>
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="Song title, artist, album..."
+                  value={this.props.username}
+                  onChange={this.props.onChangeSearchQuery}
+                />
+              </Form>
+            </CenteredSection>
             <TrackList {...trackListProps} />
           </Section>
         </div>
