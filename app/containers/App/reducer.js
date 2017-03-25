@@ -16,6 +16,9 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
+  LOAD_TRACKS_SUCCESS,
+  LOAD_TRACKS,
+  LOAD_TRACKS_ERROR,
 } from './constants';
 
 // The initial state of the App
@@ -41,6 +44,20 @@ function appReducer(state = initialState, action) {
         .set('loading', false)
         .set('currentUser', action.username);
     case LOAD_REPOS_ERROR:
+      return state
+        .set('error', action.error)
+        .set('loading', false);
+    case LOAD_TRACKS:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .setIn(['userData', 'tracks'], false);
+    case LOAD_TRACKS_SUCCESS:
+      return state
+        .setIn(['userData', 'tracks'], action.tracks)
+        .set('loading', false)
+        .set('currentUser', action.username);
+    case LOAD_TRACKS_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);
