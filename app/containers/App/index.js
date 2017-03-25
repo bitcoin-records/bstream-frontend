@@ -46,12 +46,7 @@ export function App(props) {
         autoPlay
       />
       {React.Children.toArray(props.children)}
-      <span>
-        Selected Track: {_.get(props.selectedTrack, 'name')}
-      </span>
-
       <Footer />
-      
     </AppWrapper>
   );
 }

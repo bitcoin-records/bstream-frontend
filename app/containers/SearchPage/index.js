@@ -12,6 +12,8 @@ import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router';
 import styled from 'styled-components';
 import _ from 'lodash';
+import { FaSearch } from 'react-icons/lib/fa';
+
 
 import { makeSelectRepos, makeSelectLoading, makeSelectError, makeSelectTracks } from 'containers/App/selectors';
 import H1 from 'components/H1';
@@ -19,7 +21,7 @@ import H2 from 'components/H2';
 import Button from 'components/Button';
 import TrackList from 'components/TrackList';
 // import CenteredSection from './CenteredSection';
-import Form from './Form';
+import SearchForm from './SearchForm';
 import Input from './Input';
 // import Section from './Section';
 import { loadTracks } from '../App/actions';
@@ -62,10 +64,8 @@ export class SearchPage extends React.PureComponent { // eslint-disable-line rea
         <div>
           <div>
             <div>
-              <H2>
-                Look for Songs
-              </H2>
-              <Form onSubmit={this.props.onSubmitForm}>
+              <SearchForm onSubmit={this.props.onSubmitForm}>
+                <FaSearch style={{ color: 'white', marginRight: '10px' }} />
                 <Input
                   id="searchString"
                   type="text"
@@ -73,7 +73,7 @@ export class SearchPage extends React.PureComponent { // eslint-disable-line rea
                   value={this.props.searchString}
                   onChange={this.props.onChangeSearchQuery}
                 />
-              </Form>
+              </SearchForm>
             </div>
             <TrackList {...trackListProps} onTrackSelected={(track) => { this.props.onTrackSelected(track); }} />
           </div>
