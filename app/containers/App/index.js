@@ -14,6 +14,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import withProgressBar from 'components/ProgressBar';
 import _ from 'lodash';
+import ReactAudioPlayer from 'react-audio-player'
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -26,6 +27,8 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
+
+
 export function App(props) {
   return (
     <AppWrapper>
@@ -37,11 +40,17 @@ export function App(props) {
         ]}
       />
       <Header />
+      <ReactAudioPlayer id = "musicPlayer"
+        src="my_audio_file.ogg"
+        autoPlay
+      />
       {React.Children.toArray(props.children)}
       <span>
         Selected Track: {_.get(props.selectedTrack, 'name')}
       </span>
+
       <Footer />
+      
     </AppWrapper>
   );
 }
