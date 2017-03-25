@@ -12,15 +12,16 @@ const TrackItem = styled.div`
   background: white;
   display: inline-block;
   justify-content: space-between;
-  width: 150px;
+  width: 200px;
   margin: 5px;
-  height: 300px;
+  height: 360px;
   vertical-align: middle;
   box-shadow: 0px 2px 1px #888888;
+  position: relative;
 `;
 
 const AlbumImg = styled(Img)`
-  max-height: 150px;
+  width: 100%;
   margin: 0;
 `;
 
@@ -36,6 +37,17 @@ const ArtistLabel = styled.span`
   color: #cccccc;
   font-size: 12px;
 `;
+
+
+const PriceLabel = styled.div`
+  color: green;
+  font-weight: 800;
+  font-size: 18px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+`;
+
 
 
 
@@ -59,6 +71,7 @@ function TrackList({ loading, error, tracks, onTrackSelected }) {
           <SongInfo>
             <SongTitleLabel>{track.name}</SongTitleLabel><br />
             <ArtistLabel>{_.get(track, 'artists.[0].name')}</ArtistLabel>
+            <PriceLabel>¢5</PriceLabel>
           </SongInfo>
         </TrackItem>
       ))}
