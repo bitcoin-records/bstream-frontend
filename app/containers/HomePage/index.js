@@ -52,10 +52,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         <div>
           <CenteredSection>
             <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
+              BSTREAM
             </H2>
             <p>
-              <FormattedMessage {...messages.startProjectMessage} />
+              Stream music and support artists you love.
             </p>
           </CenteredSection>
           <Section>
