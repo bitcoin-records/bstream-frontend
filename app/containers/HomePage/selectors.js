@@ -11,6 +11,13 @@ const makeSelectUsername = () => createSelector(
   (homeState) => homeState.get('username')
 );
 
+
+const makeSelectSearchString = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('searchString')
+);
+
+
 const makeSelectSelectedTrack = () => createSelector(
   selectHome,
   (homeState) => homeState.get('selectedTrack')
@@ -20,5 +27,6 @@ const makeSelectSelectedTrack = () => createSelector(
 export {
   selectHome,
   makeSelectUsername,
+  makeSelectSearchString,
   makeSelectSelectedTrack,
 };

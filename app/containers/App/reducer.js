@@ -26,7 +26,9 @@ const initialState = fromJS({
   loading: false,
   error: false,
   currentUser: false,
+  searchString: '',
   userData: {
+    tracks: false,
     repositories: false,
   },
 });

@@ -45,7 +45,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/">
             HOME
           </HeaderLink>
-          <HeaderLink to="/features">
+          <HeaderLink to="/discover">
             DISCOVER
           </HeaderLink>
           <HeaderLink to="/features">
@@ -53,7 +53,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           </HeaderLink>
           <HeaderLink to="/features">
             <RoundAvatar>
-              <Avatar facebookId="100008343750912" size="25" /> 
+              <Avatar facebookId="100008343750912" size={25} /> 
             </RoundAvatar>
             <UserIdentity>
               <UsernameLabel>Username</UsernameLabel><UserCreditLabel>CREDIT: 0.002 BTC</UserCreditLabel>

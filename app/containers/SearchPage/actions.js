@@ -16,9 +16,7 @@
  */
 
 import {
-  CHANGE_USERNAME,
   CHANGE_SEARCHSTRING,
-  SELECT_TRACK,
 } from './constants';
 
 /**
@@ -28,24 +26,9 @@ import {
  *
  * @return {object}    An action object with a type of CHANGE_USERNAME
  */
-export function changeUsername(name) {
-  return {
-    type: CHANGE_USERNAME,
-    name,
-  };
-}
-
 export function changeSearchString(searchString) {
   return {
     type: CHANGE_SEARCHSTRING,
     searchString,
-  };
-}
-
-
-export function selectTrack(track) {
-  return {
-    type: SELECT_TRACK,
-    track,
   };
 }

@@ -8,7 +8,7 @@ import { LOAD_REPOS, LOAD_TRACKS } from 'containers/App/constants';
 import { reposLoaded, repoLoadingError, tracksLoaded, trackLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { makeSelectUsername } from 'containers/HomePage/selectors';
+import { makeSelectUsername, makeSelectSearchString } from 'containers/HomePage/selectors';
 
 /**
  * Github repos request/response handler
@@ -31,7 +31,7 @@ export function* getRepos() {
  * Spotify Tracks request handler
  */
 export function* getTracks() {
-  const searchQuery = yield select(makeSelectUsername());
+  const searchQuery = yield select(makeSelectSearchString());
   const requestURL = `https://api.spotify.com/v1/search?type=track&q=${searchQuery}`;
 
   try {
