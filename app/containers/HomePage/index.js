@@ -10,6 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router';
+import { FaMusic } from 'react-icons/lib/fa';
 
 import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
@@ -54,7 +55,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         <div>
           <CenteredSection>
             <H2>
-              BSTREAM
+              BSTREAM <FaMusic />
             </H2>
             <p>
               Stream music and support artists you love.
