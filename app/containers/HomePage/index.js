@@ -12,6 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router';
 import { FaMusic } from 'react-icons/lib/fa';
 import styled from 'styled-components';
+import ReactSVG from 'react-svg'
 
 import { makeSelectRepos, makeSelectLoading, makeSelectError, makeSelectTracks } from 'containers/App/selectors';
 import H1 from 'components/H1';
@@ -28,6 +29,8 @@ import { loadRepos, loadTracks, selectTrack, socialLoginRequest } from '../App/a
 import { changeSearchString } from './actions';
 import { makeSelectUsername } from './selectors';
 import splashImg from './splash.jpg';
+import logoSvg from './logo.svg';
+
 
 
 const BannerSection = styled(CenteredSection)`
@@ -38,7 +41,7 @@ const BannerSection = styled(CenteredSection)`
 `;
 
 const BannerOverlay = styled(CenteredSection)`
-  background-color: rgba(50,50,50,0.8);
+  background-color: rgba(79,83,96,0.8);
   padding: 60px 60px;
   min-height: 80vh;
 `;
@@ -74,6 +77,9 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     const bannerStyle = {
       backgroundImage: 'url(' + splashImg + ')',
     };
+    const logoStyle = {
+      maxWidth: '400px',
+    };
 
     return (
       <article>
@@ -87,7 +93,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           <BannerSection style={bannerStyle}>
             <BannerOverlay>
               <H1>
-                BSTREAM <FaMusic />
+                <ReactSVG path={logoSvg} style={logoStyle} />
               </H1>
               <p>
                 Stream music and support artists you love.
