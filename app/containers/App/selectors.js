@@ -16,6 +16,11 @@ const makeSelectUser = () => createSelector(
   (globalState) => globalState.get('user')
 );
 
+const makeSelectBStreamUser = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('bStreamUser')
+);
+
 const makeSelectSearchString = () => createSelector(
   selectGlobal,
   (globalState) => globalState.get('searchString')
@@ -78,4 +83,5 @@ export {
   makeSelectSelectedTrack,
   makeSelectLocationState,
   makeSelectRegisteringUser,
+  makeSelectBStreamUser,
 };

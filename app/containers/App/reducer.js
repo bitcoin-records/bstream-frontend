@@ -88,7 +88,7 @@ function appReducer(state = initialState, action) {
         .set('error', false);
     case BSTREAM_REGISTER_SUCCESS:
       return state
-        .set('user', action.user);
+        .set('bStreamUser', action.user);
     case BSTREAM_REGISTER_ERROR:
       return state
         .set('error', action.error)

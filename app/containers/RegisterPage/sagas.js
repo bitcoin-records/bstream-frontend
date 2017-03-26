@@ -26,9 +26,9 @@ export function* registerUser() {
     console.log(registeringUser);
     console.log(agent);
     const register = () => agent.post('http://localhost:5000/register', registeringUser).end();
-    const user = yield call(register);
-    console.log(user);
-    yield put(bstreamRegisterSuccess({ user }))
+    const response = yield call(register);
+    console.log(response);
+    yield put(bstreamRegisterSuccess({ user: response.body }))
     yield put(push('/discover'));
 
   } catch (e) {

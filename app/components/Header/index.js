@@ -56,7 +56,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
             <HeaderLink to="/userName">
               <UserImg src={_.get(this.props.user, 'picture')} />
               <UserIdentity>
-                <UsernameLabel>{_.get(this.props.user, 'name')}</UsernameLabel><UserCreditLabel>CREDIT: 0.002 BTC</UserCreditLabel>
+                <UsernameLabel>{_.get(this.props.user, 'name')}</UsernameLabel><UserCreditLabel>BALANCE: {_.get(this.props.user, 'balance')}</UserCreditLabel>
               </UserIdentity>
             </HeaderLink>
           }  
