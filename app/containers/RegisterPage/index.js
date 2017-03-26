@@ -17,7 +17,9 @@ import Img from 'components/Img';
 import Button from 'components/Button';
 import Input from './Input';
 import CenteredSection from './CenteredSection';
-import { loadRepos } from '../App/actions';
+import { changeUserWalletId } from './actions';
+import { bstreamRegisterRequest } from '../App/actions';
+import { makeSelectUserWalletId } from './selectors';
 
 const UserImg = styled(Img)`
   width: 100px;
@@ -34,6 +36,15 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
     }
+  }
+
+  onSubmitForm(evt) {
+    const user = {
+      username: this.props.user.name,
+      userWalletId: this.props.userWalletId,
+      balance: 100
+    }
+    this.props.onSubmitForm(evt, user);
   }
 
   render() {
@@ -76,11 +87,9 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
                 type="text"
                 placeholder="1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
                 value={this.props.username}
-                onChange={this.props.onChangeUsername}
+                onChange={this.props.onChangeUserWalletId}
               />
-            <Link to="/discover">
-              <Button>Register</Button>
-            </Link>
+            <Button onClick={(e) => (this.onSubmitForm(e))}>Register</Button>
           </CenteredSection>
         </div>
       </article>
@@ -103,15 +112,15 @@ RegisterPage.propTypes = {
     React.PropTypes.bool,
   ]),
   onSubmitForm: React.PropTypes.func,
-  onChangeUsername: React.PropTypes.func,
+  onChangeUserWalletId: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: (evt) => {
+    onChangeUserWalletId: (evt) => dispatch(changeUserWalletId(evt.target.value)),
+    onSubmitForm: (evt, user) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
+      dispatch(bstreamRegisterRequest(user));
     },
   };
 }
@@ -119,6 +128,7 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
   user: makeSelectUser(),
+  userWalletId: makeSelectUserWalletId(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });

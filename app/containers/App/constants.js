@@ -22,5 +22,11 @@ export const SOCIAL_LOGIN_REQUEST = 'boilerplate/App/SOCIAL_LOGIN_REQUEST';
 export const SOCIAL_LOGIN_SUCCESS = 'boilerplate/App/SOCIAL_LOGIN_SUCCESS';
 export const SOCIAL_LOGIN_FAILURE = 'boilerplate/App/SOCIAL_LOGIN_FAILURE';
 export const SOCIAL_LOGOUT = 'boilerplate/App/SOCIAL_LOGOUT';
+export const BSTREAM_REGISTER_REQUEST = 'boilerplate/App/BSTREAM_REGISTER_REQUEST';
+export const BSTREAM_REGISTER_SUCCESS = 'boilerplate/App/BSTREAM_REGISTER_SUCCESS';
+export const BSTREAM_REGISTER_ERROR = 'boilerplate/App/BSTREAM_REGISTER_ERROR';
+export const BSTREAM_TRACK_STREAM_REQUEST = 'boilerplate/App/BSTREAM_TRACK_STREAM_REQUEST';
+export const BSTREAM_TRACK_STREAM_SUCCESS = 'boilerplate/App/BSTREAM_TRACK_STREAM_SUCCESS';
+export const BSTREAM_TRACK_STREAM_ERROR = 'boilerplate/App/BSTREAM_TRACK_STREAM_ERROR';
 export const DEFAULT_LOCALE = 'en';
 

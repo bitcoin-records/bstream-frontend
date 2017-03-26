@@ -46,6 +46,11 @@ const makeSelectSelectedTrack = () => createSelector(
   (globalState) => globalState.get('selectedTrack')
 );
 
+const makeSelectRegisteringUser = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('registeringUser')
+);
+
 const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -72,4 +77,5 @@ export {
   makeSelectTracks,
   makeSelectSelectedTrack,
   makeSelectLocationState,
+  makeSelectRegisteringUser,
 };

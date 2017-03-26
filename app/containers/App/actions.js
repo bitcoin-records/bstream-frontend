@@ -28,6 +28,12 @@ import {
   SOCIAL_LOGIN_SUCCESS,
   SOCIAL_LOGIN_FAILURE,
   SOCIAL_LOGOUT,
+  BSTREAM_REGISTER_REQUEST,
+  BSTREAM_REGISTER_SUCCESS,
+  BSTREAM_REGISTER_ERROR,
+  BSTREAM_TRACK_STREAM_REQUEST,
+  BSTREAM_TRACK_STREAM_SUCCESS,
+  BSTREAM_TRACK_STREAM_ERROR,
 } from './constants';
 
 /**
@@ -138,4 +144,28 @@ export function socialLoginFailure(error) {
 
 export function socialLogout() {
   return { type: SOCIAL_LOGOUT };
+}
+
+export function bstreamRegisterRequest(user) {
+  return { type: BSTREAM_REGISTER_REQUEST, user };
+}
+
+export function bstreamRegisterSuccess(user) {
+  return { type: BSTREAM_REGISTER_SUCCESS, user };
+}
+
+export function bstreamRegisterError(error) {
+  return { type: BSTREAM_REGISTER_ERROR, error };
+}
+
+export function bstreamTrackStreamRequest(track) {
+  return { type: BSTREAM_TRACK_STREAM_REQUEST, track };
+}
+
+export function bstreamTrackStreamSuccess(track) {
+  return { type: BSTREAM_TRACK_STREAM_SUCESSS, track };
+}
+
+export function bstreamTrackStreamError(error) {
+  return { type: BSTREAM_TRACK_STREAM_ERROR, error };
 }

@@ -1,9 +1,17 @@
 import { take, put, call, fork } from 'redux-saga/effects'
 import { push } from 'react-router-redux';
-import { socialLoginPrepare, socialLoginRequest, socialLoginSuccess, socialLoginFailure, socialLogout } from './actions'
-import { SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_LOGIN_SUCCESS, SOCIAL_LOGIN_FAILURE, SOCIAL_LOGOUT } from './constants'
-
-
+import { 
+          socialLoginPrepare, 
+          socialLoginRequest, 
+          socialLoginSuccess, 
+          socialLoginFailure, 
+          socialLogout,
+          bstreamRegisterRequest,
+          bstreamRegisterSuccess,
+          bstreamRegisterError,
+       } from './actions'
+import { SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_LOGIN_SUCCESS, SOCIAL_LOGIN_FAILURE, SOCIAL_LOGOUT, BSTREAM_REGISTER_REQUEST } from './constants'
+import { makeSelectRegisteringUser } from 'containers/App/selectors';
 
 export const promises = {
   fbLogin: (options) => new Promise((resolve, reject) => {
@@ -93,9 +101,29 @@ export function* watchSocialLoginGoogle () {
   }
 }
 
+export function* watchBStreamRegister () {
+  while (true) {
+    try {
+      console.log('try');
+      const registeringUser = yield take(makeSelectRegisteringUser());
+      const { options } = yield take(BSTREAM_REGISTER_REQUEST);
+      const user = yield call(
+                  agent.post('http://localhost:5000/register', registeringUser)
+                    .end(), 
+                  options
+                );
+      yield put(bstreamRegisterSuccess({ user }))
+    } catch (e) {
+      yield put(bstreamRegisterError({ error: e }))
+    }
+  }
+}
+
 export function* rootSaga() {
+  // const watcher = yield takeLatest(BSTREAM_REGISTER_REQUEST, registerUser);
   yield fork(watchSocialLoginFacebook)
-  yield fork(watchSocialLoginGoogle)
+  //yield fork(watchBStreamRegister)
+
 }
 
 export default [

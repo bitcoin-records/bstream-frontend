@@ -22,6 +22,12 @@ import {
   SELECT_TRACK,
   SOCIAL_LOGIN_SUCCESS,
   SOCIAL_LOGOUT,
+  BSTREAM_REGISTER_REQUEST,
+  BSTREAM_REGISTER_SUCCESS,
+  BSTREAM_REGISTER_ERROR,
+  BSTREAM_TRACK_STREAM_REQUEST,
+  BSTREAM_TRACK_STREAM_SUCCESS,
+  BSTREAM_TRACK_STREAM_ERROR,
 } from './constants';
 
 // The initial state of the App
@@ -75,6 +81,29 @@ function appReducer(state = initialState, action) {
     case SOCIAL_LOGOUT:
       return state
         .set('user', initialState.user);
+    case BSTREAM_REGISTER_REQUEST:
+      return state
+        .set('registeringUser', action.user)
+        .set('loading', true)
+        .set('error', false);
+    case BSTREAM_REGISTER_SUCCESS:
+      return state
+        .set('user', action.user);
+    case BSTREAM_REGISTER_ERROR:
+      return state
+        .set('error', action.error)
+        .set('loading', false);
+    case BSTREAM_TRACK_STREAM_REQUEST:
+      return state
+        .set('loading', true)
+        .set('error', false)
+    case BSTREAM_TRACK_STREAM_SUCCESS:
+      return state
+        .set('loading', false);
+    case BSTREAM_TRACK_STREAM_ERROR:
+      return state
+        .set('error', action.error)
+        .set('loading', false);
     default:
       return state;
   }
