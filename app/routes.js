@@ -70,6 +70,14 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/playlist',
+      name: 'playlist',
+      getComponent(nextState, cb) {
+        import('containers/PlayListPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: '/discover',
       name: 'discover',
       getComponent(nextState, cb) {

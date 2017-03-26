@@ -50,9 +50,16 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/discover">
             DISCOVER
           </HeaderLink>
-          <HeaderLink to="/history">
-            MY HISTORY
-          </HeaderLink>
+          {this.props.user &&
+            <HeaderLink to="/history">
+              MY HISTORY
+            </HeaderLink>
+          }
+          {this.props.user &&
+            <HeaderLink to = '/playlist'>
+              PLAY LIST
+            </HeaderLink>
+          }
           {this.props.user &&
             <HeaderLink to="/userName">
               <UserImg src={_.get(this.props.user, 'picture')} />
@@ -74,7 +81,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
 
 Header.propTypes = {
   user: React.PropTypes.optionalObject,
-  onLoginClicked: React.PropTypes.func,
+  onLoginClickd: React.PropTypes.func,
 };
 
 

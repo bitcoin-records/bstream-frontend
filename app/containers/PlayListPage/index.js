@@ -46,9 +46,9 @@ export class HistoryPage extends React.PureComponent { // eslint-disable-line re
     const rows = [];
     
     const columns = [
-      { key: 'id', name: 'Number', width: 100},
+      { key: 'id', name: 'Title'},
       { key: 'title', name: 'Artist' },
-      { key: 'count', name: 'Pay' }];
+      { key: 'count', name: 'Time' }];
 
     const rowGetter = function(i) {
       return rows[i];
@@ -57,7 +57,7 @@ export class HistoryPage extends React.PureComponent { // eslint-disable-line re
 
     return (
       <div>
-      <h1>My History</h1>
+      <h1>Play List</h1>
       <br/>
       <ReactDataGrid
         columns={columns}
