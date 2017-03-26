@@ -35,6 +35,7 @@ const UserCreditLabel = styled.div`
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const balance = parseFloat(_.get(this.props.user, 'balance') || 0).toFixed(2);
     return (
       <div>
         {/*
@@ -56,7 +57,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
             <HeaderLink to="/userName">
               <UserImg src={_.get(this.props.user, 'picture')} />
               <UserIdentity>
-                <UsernameLabel>{_.get(this.props.user, 'name')}</UsernameLabel><UserCreditLabel>BALANCE: {_.get(this.props.user, 'balance')}</UserCreditLabel>
+                <UsernameLabel>{_.get(this.props.user, 'name')}</UsernameLabel><UserCreditLabel>BALANCE: {balance}</UserCreditLabel>
               </UserIdentity>
             </HeaderLink>
           }  
