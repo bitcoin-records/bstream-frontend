@@ -81,7 +81,7 @@ export class App extends React.PureComponent {
             { name: 'description', content: 'A React.js Boilerplate application' },
           ]}
         />
-        <Header user={this.props.user} />
+        <Header user={this.props.user} onLoginClicked={() => { this.props.loginFacebook() }}/>
         {props.selectedTrack &&
           <AudioPlayerBar>
             <AudioPlayerBarInner>
