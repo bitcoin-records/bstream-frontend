@@ -19,7 +19,7 @@ import ReactAudioPlayer from 'react-audio-player'
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectSelectedTrack } from './selectors';
+import { makeSelectSelectedTrack, makeSelectUser } from './selectors';
 import { socialLoginPrepare, socialLoginRequest, socialLoginSuccess, socialLoginFailure, socialLogout } from './actions';
 
 const facebookAppId = '394516554261290';
@@ -81,7 +81,7 @@ export class App extends React.PureComponent {
             { name: 'description', content: 'A React.js Boilerplate application' },
           ]}
         />
-        <Header />
+        <Header user={this.props.user} />
         {props.selectedTrack &&
           <AudioPlayerBar>
             <AudioPlayerBarInner>
@@ -109,6 +109,7 @@ App.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   selectedTrack: makeSelectSelectedTrack(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

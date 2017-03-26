@@ -6,8 +6,9 @@ import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import messages from './messages';
 import styled from 'styled-components';
+import Img from 'components/Img';
 
-const RoundAvatar = styled.div`
+const UserImg = styled(Img)`
   width: 25px;
   height: 25px;
   border-radius: 10px;
@@ -52,17 +53,30 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
             MY HISTORY
           </HeaderLink>
           <HeaderLink to="/features">
-            <RoundAvatar>
-              <Avatar facebookId="100008343750912" size={25} /> 
-            </RoundAvatar>
-            <UserIdentity>
-              <UsernameLabel>Username</UsernameLabel><UserCreditLabel>CREDIT: 0.002 BTC</UserCreditLabel>
-            </UserIdentity>
+            {this.props.user &&
+              <div>
+                <UserImg src={_.get(this.props.user, 'picture')} />
+                <UserIdentity>
+                  <UsernameLabel>{_.get(this.props.user, 'name')}</UsernameLabel><UserCreditLabel>CREDIT: 0.002 BTC</UserCreditLabel>
+                </UserIdentity>
+              </div>
+            }
+            {!this.props.user &&
+              <div>
+                LOGIN
+              </div>
+            }
+            
           </HeaderLink>
         </NavBar>
       </div>
     );
   }
 }
+
+Header.propTypes = {
+  user: React.PropTypes.optionalObject,
+};
+
 
 export default Header;

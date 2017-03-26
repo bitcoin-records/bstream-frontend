@@ -78,7 +78,9 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
                 value={this.props.username}
                 onChange={this.props.onChangeUsername}
               />
-            <Button>Register</Button>
+            <Link to="/discover">
+              <Button>Register</Button>
+            </Link>
           </CenteredSection>
         </div>
       </article>
