@@ -23,15 +23,16 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/HomePage/reducer'),
+          import('containers/App/sagas'),
           import('containers/HomePage/sagas'),
           import('containers/HomePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, globalSagas, sagas, component]) => {
           injectReducer('home', reducer.default);
-          injectSagas(sagas.default);
+          injectSagas(_.concat(globalSagas.default, sagas.default));
 
           renderRoute(component);
         });
@@ -60,15 +61,16 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/SearchPage/reducer'),
+          import('containers/App/sagas'),
           import('containers/SearchPage/sagas'),
           import('containers/SearchPage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, globalSagas, sagas, component]) => {
           injectReducer('search', reducer.default);
-          injectSagas(sagas.default);
+          injectSagas(_.concat(globalSagas.default, sagas.default));
 
           renderRoute(component);
         });

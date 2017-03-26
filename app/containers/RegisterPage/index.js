@@ -9,13 +9,22 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import styled from 'styled-components';
 
-import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+import { makeSelectRepos, makeSelectLoading, makeSelectError, makeSelectUser } from 'containers/App/selectors';
 import H2 from 'components/H2';
+import Img from 'components/Img';
 import Button from 'components/Button';
 import Input from './Input';
 import CenteredSection from './CenteredSection';
 import { loadRepos } from '../App/actions';
+
+const UserImg = styled(Img)`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: 3px solid white;
+`;
 
 export class RegisterPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -52,6 +61,14 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
               Stream music and support artists you love.
             </p>
           </CenteredSection>
+          {this.props.user &&
+            <CenteredSection>
+              <UserImg src={this.props.user.picture} />
+              <p>
+                Logged in as {this.props.user.name}
+              </p>
+            </CenteredSection>
+          }
           <CenteredSection>
             <label>Your Wallet</label><br />
             <Input
@@ -75,6 +92,10 @@ RegisterPage.propTypes = {
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
+  user: React.PropTypes.oneOfType([
+    React.PropTypes.object,
+    React.PropTypes.bool,
+  ]),
   repos: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.bool,
@@ -95,6 +116,7 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
+  user: makeSelectUser(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });

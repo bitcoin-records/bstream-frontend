@@ -23,6 +23,11 @@ import {
   LOAD_TRACKS_SUCCESS,
   LOAD_TRACKS_ERROR,
   SELECT_TRACK,
+  SOCIAL_LOGIN_PREPARE,
+  SOCIAL_LOGIN_REQUEST,
+  SOCIAL_LOGIN_SUCCESS,
+  SOCIAL_LOGIN_FAILURE,
+  SOCIAL_LOGOUT,
 } from './constants';
 
 /**
@@ -108,4 +113,29 @@ export function selectTrack(track) {
     type: SELECT_TRACK,
     track,
   };
+}
+
+/**
+ * Social Login
+ */
+
+export function socialLoginPrepare(service, options) {
+  return { type: SOCIAL_LOGIN_PREPARE, service, options };
+}
+
+export function socialLoginRequest(service, options) {
+  console.log('socialLoginRequest');
+  return { type: SOCIAL_LOGIN_REQUEST, service, options };
+}
+
+export function socialLoginSuccess(user) {
+  return { type: SOCIAL_LOGIN_SUCCESS, user };
+}
+
+export function socialLoginFailure(error) {
+  return { type: SOCIAL_LOGIN_FAILURE, error };
+}
+
+export function socialLogout() {
+  return { type: SOCIAL_LOGOUT };
 }

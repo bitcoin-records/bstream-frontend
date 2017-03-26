@@ -20,6 +20,9 @@ import ReactAudioPlayer from 'react-audio-player'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectSelectedTrack } from './selectors';
+import { socialLoginPrepare, socialLoginRequest, socialLoginSuccess, socialLoginFailure, socialLogout } from './actions';
+
+const facebookAppId = '394516554261290';
 
 const AppWrapper = styled.div`
   margin: 0 auto;
@@ -59,36 +62,44 @@ const AlbumPreviewImg = styled(Img)`
 `;
 
 
+//class HomePage extends React.PureComponent 
 
-export function App(props) {
-  console.log(props.selectedTrack);
-  return (
-    <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-        meta={[
-          { name: 'description', content: 'A React.js Boilerplate application' },
-        ]}
-      />
-      <Header />
-      {props.selectedTrack &&
-        <AudioPlayerBar>
-          <AudioPlayerBarInner>
-            <ReactAudioPlayer id="musicPlayer"
-              src={_.get(props.selectedTrack, 'preview_url')}
-              autoPlay
-            /> <TrackInfo>
-              <AlbumPreviewImg src={_.get(props.selectedTrack, 'album.images[0].url')} />
-              <TrackLabel>{_.get(props.selectedTrack, 'name')} - {_.get(props.selectedTrack, 'artists[0].name')}</TrackLabel>
-            </TrackInfo>
-          </AudioPlayerBarInner>
-        </AudioPlayerBar>
-      }
-      {React.Children.toArray(props.children)}
-      <Footer />
-    </AppWrapper>
-  );
+export class App extends React.PureComponent {
+  
+  componentDidMount() {
+    this.props.prepareFacebook()
+  }
+
+  render() {
+    const props = this.props;
+    return (
+      <AppWrapper>
+        <Helmet
+          titleTemplate="%s - React.js Boilerplate"
+          defaultTitle="React.js Boilerplate"
+          meta={[
+            { name: 'description', content: 'A React.js Boilerplate application' },
+          ]}
+        />
+        <Header />
+        {props.selectedTrack &&
+          <AudioPlayerBar>
+            <AudioPlayerBarInner>
+              <ReactAudioPlayer id="musicPlayer"
+                src={_.get(props.selectedTrack, 'preview_url')}
+                autoPlay
+              /> <TrackInfo>
+                <AlbumPreviewImg src={_.get(props.selectedTrack, 'album.images[0].url')} />
+                <TrackLabel>{_.get(props.selectedTrack, 'name')} - {_.get(props.selectedTrack, 'artists[0].name')}</TrackLabel>
+              </TrackInfo>
+            </AudioPlayerBarInner>
+          </AudioPlayerBar>
+        }
+        {React.Children.toArray(props.children)}
+        <Footer />
+      </AppWrapper>
+    );
+  }
 }
 
 App.propTypes = {
@@ -100,8 +111,14 @@ const mapStateToProps = createStructuredSelector({
   selectedTrack: makeSelectSelectedTrack(),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  prepareFacebook: () => dispatch(socialLoginPrepare('facebook', { appId: facebookAppId })),
+  loginFacebook: () => dispatch(socialLoginRequest('facebook')),
+  logout: () => dispatch(socialLogout())
+})
+
 // export default withProgressBar(App);
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps)(withProgressBar(App));
+export default connect(mapStateToProps, mapDispatchToProps)(withProgressBar(App));
 

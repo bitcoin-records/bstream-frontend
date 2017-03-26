@@ -24,7 +24,7 @@ import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos, loadTracks, selectTrack } from '../App/actions';
+import { loadRepos, loadTracks, selectTrack, socialLoginRequest } from '../App/actions';
 import { changeSearchString } from './actions';
 import { makeSelectUsername } from './selectors';
 import splashImg from './splash.jpg';
@@ -59,6 +59,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     }
   }
 
+  onLoginButtonClicked() {
+    this.props.loginFacebook();
+  }
+
   render() {
 
     const { loading, error, tracks } = this.props;
@@ -88,9 +92,11 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               <p>
                 Stream music and support artists you love.
               </p>
+              {/*
               <Link to="/register">
-                <WhiteButton>Getting Started</WhiteButton>
-              </Link> 
+              </Link>
+              */} 
+              <WhiteButton onClick={() => (this.onLoginButtonClicked())}>Getting Started</WhiteButton>
             </BannerOverlay>
           </BannerSection>
           <Section>
@@ -134,6 +140,7 @@ HomePage.propTypes = {
   username: React.PropTypes.string,
   onChangeSearchQuery: React.PropTypes.func,
   onTrackSelected: React.PropTypes.func,
+  loginFacebook: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -146,6 +153,7 @@ export function mapDispatchToProps(dispatch) {
     onTrackSelected: (track) => {
       dispatch(selectTrack(track));
     },
+    loginFacebook: () => dispatch(socialLoginRequest('facebook')),
   };
 }
 

@@ -50,6 +50,8 @@ export function injectAsyncReducer(store, isValid) {
  */
 export function injectAsyncSagas(store, isValid) {
   return function injectSagas(sagas) {
+    console.log('injectSagas');
+    console.log(sagas);
     if (!isValid) checkStore(store);
 
     invariant(

@@ -20,6 +20,8 @@ import {
   LOAD_TRACKS,
   LOAD_TRACKS_ERROR,
   SELECT_TRACK,
+  SOCIAL_LOGIN_SUCCESS,
+  SOCIAL_LOGOUT,
 } from './constants';
 
 // The initial state of the App
@@ -67,6 +69,12 @@ function appReducer(state = initialState, action) {
     case SELECT_TRACK:
       return state
         .set('selectedTrack', action.track);
+    case SOCIAL_LOGIN_SUCCESS:
+      return state
+        .set('user', action.user);
+    case SOCIAL_LOGOUT:
+      return state
+        .set('user', initialState.user);
     default:
       return state;
   }

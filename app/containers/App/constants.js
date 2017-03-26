@@ -16,4 +16,11 @@ export const LOAD_TRACKS = 'boilerplate/App/LOAD_TRACKS';
 export const LOAD_TRACKS_SUCCESS = 'boilerplate/App/LOAD_TRACKS_SUCCESS';
 export const LOAD_TRACKS_ERROR = 'boilerplate/App/LOAD_TRACKS_ERROR';
 export const SELECT_TRACK = 'boilerplate/Home/SELECT_TRACK';
+export const SOCIAL_LOGIN = 'boilerplate/App/SOCIAL_LOGIN';
+export const SOCIAL_LOGIN_PREPARE = 'boilerplate/App/SOCIAL_LOGIN_PREPARE';
+export const SOCIAL_LOGIN_REQUEST = 'boilerplate/App/SOCIAL_LOGIN_REQUEST';
+export const SOCIAL_LOGIN_SUCCESS = 'boilerplate/App/SOCIAL_LOGIN_SUCCESS';
+export const SOCIAL_LOGIN_FAILURE = 'boilerplate/App/SOCIAL_LOGIN_FAILURE';
+export const SOCIAL_LOGOUT = 'boilerplate/App/SOCIAL_LOGOUT';
 export const DEFAULT_LOCALE = 'en';
+
