@@ -52,19 +52,22 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/history">
             MY HISTORY
           </HeaderLink>
-          {this.props.user &&
-            <HeaderLink to="/userName">
-              <UserImg src={_.get(this.props.user, 'picture')} />
-              <UserIdentity>
-                <UsernameLabel>{_.get(this.props.user, 'name')}</UsernameLabel><UserCreditLabel>CREDIT: 0.002 BTC</UserCreditLabel>
-              </UserIdentity>
-            </HeaderLink>
-          }  
-          {!this.props.user &&
-            <HeaderLink onClick={() => (this.props.onLoginClicked())}>
-              LOGIN
-            </HeaderLink>
-          }
+          
+            {this.props.user &&
+              <HeaderLink to="/userName">
+                <div>
+                  <UserImg src={_.get(this.props.user, 'picture')} />
+                  <UserIdentity>
+                    <UsernameLabel>{_.get(this.props.user, 'name')}</UsernameLabel><UserCreditLabel>CREDIT: 0.002 BTC</UserCreditLabel>
+                  </UserIdentity>
+                </div>
+              </HeaderLink>
+            }
+            {!this.props.user &&
+              <HeaderLink onClick={() => {this.props.onLoginClicked()}}>
+                LOGIN
+              </HeaderLink>
+            }          
         </NavBar>
       </div>
     );
@@ -73,7 +76,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
 
 Header.propTypes = {
   user: React.PropTypes.optionalObject,
-  onLoginClicked: React.PropTypes.func,
+  onLoginClickd: React.PropTypes.func,
 };
 
 
