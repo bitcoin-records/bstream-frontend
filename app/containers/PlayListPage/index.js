@@ -48,7 +48,7 @@ export class HistoryPage extends React.PureComponent { // eslint-disable-line re
     const columns = [
       { key: 'id', name: 'Title'},
       { key: 'title', name: 'Artist' },
-      { key: 'count', name: 'Time' }];
+      { key: 'count', name: 'Time', width: 150 }];
 
     const rowGetter = function(i) {
       return rows[i];
