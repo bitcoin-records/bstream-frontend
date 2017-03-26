@@ -13,9 +13,17 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import Button from 'components/Button';
-import Input from './Input';
-import CenteredSection from './CenteredSection';
+import 'bootstrap/dist/css/bootstrap.css';
+
 import { loadRepos } from '../App/actions';
+
+const ReactDataGrid = require('react-data-grid');
+
+const EmptyRowsView = React.createClass({
+  render() {
+    return (<div>Nothing to show</div>);
+  }
+});
 
 export class HistoryPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -35,43 +43,37 @@ export class HistoryPage extends React.PureComponent { // eslint-disable-line re
       repos,
     };
 
+    const rows = [];
+    const columns = [
+      { key: 'id', name: 'ID' },
+      { key: 'title', name: 'Title' },
+      { key: 'count', name: 'Count' }];
+
+    const rowGetter = function(i) {
+      return rows[i];
+    };
+
     return (
-      <article>
-        <Helmet
-          title="Home Page"
-          meta={[
-            { name: 'description', content: 'A React.js Boilerplate application homepage' },
-          ]}
-        />
-        <div>
-          <CenteredSection>
-            <H2>
-              BSTREAM
-            </H2>
-            <p>
-              Stream music and support artists you love.
-            </p>
-          </CenteredSection>
-          <CenteredSection>
-            <label>Your History</label><br />
-            <ul>
-              <li>
-                <span>Sia</span>
-                <span>1 BTC</span>
-              </li>
-              <li>
-                <span>Radiohead</span>
-                <span>2 BTC</span>
-              </li>
-            </ul>
-          </CenteredSection>
-        </div>
-      </article>
+      <div>
+      <h1>User history</h1>
+      <p>Music played</p>
+      <div>
+        Here there are music played with pictures, names, and artists.(Grid)  
+      </div>
+      <p>My artist</p>
+      Use table to show the artist and money I paid
+      <ReactDataGrid
+        columns={columns}
+        rowGetter={rowGetter}
+        rowsCount={rows.length}
+        minHeight={500}
+        emptyRowsView={EmptyRowsView} />
+      </div>
     );
   }
 }
 
-RegisterPage.propTypes = {
+HistoryPage.propTypes = {
   loading: React.PropTypes.bool,
   error: React.PropTypes.oneOfType([
     React.PropTypes.object,
