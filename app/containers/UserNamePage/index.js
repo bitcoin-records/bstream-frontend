@@ -16,16 +16,8 @@ import Button from 'components/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 import { loadRepos } from '../App/actions';
 
-const ReactDataGrid = require('react-data-grid');
 
-const EmptyRowsView = React.createClass({
-  render() {
-    return (<div>Nothing to show</div>);
-  }
-});
-
-
-export class HistoryPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class UserNamePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
    * when initial state username is not null, submit the form to load repos
    */
@@ -42,34 +34,13 @@ export class HistoryPage extends React.PureComponent { // eslint-disable-line re
       error,
       repos,
     };
-
-    const rows = [];
-    const columns = [
-      { key: 'id', name: 'Number', width: 100},
-      { key: 'title', name: 'Artist' },
-      { key: 'count', name: 'Pay' }];
-
-    const rowGetter = function(i) {
-      return rows[i];
-    };
-
-
-    return (
-      <div>
-      <h1>My artist</h1>
-      <br/>
-      <ReactDataGrid
-        columns={columns}
-        rowGetter={rowGetter}
-        rowsCount={rows.length}
-        minHeight={400}
-        emptyRowsView={EmptyRowsView} />
-      </div>
+    return(
+    <h1>userName Information</h1>
     );
   }
 }
 
-HistoryPage.propTypes = {
+UserNamePage.propTypes = {
   loading: React.PropTypes.bool,
   error: React.PropTypes.oneOfType([
     React.PropTypes.object,
@@ -100,4 +71,4 @@ const mapStateToProps = createStructuredSelector({
 });
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps, mapDispatchToProps)(HistoryPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserNamePage);

@@ -83,6 +83,14 @@ export default function createRoutes(store) {
           .then(loadModule(cb))
           .catch(errorLoading);
       },
+    },{
+      path: '/userName',
+      name: 'history',
+      getComponent(nextState, cb) {
+        import('containers/UserNamePage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
     }, {
       path: '*',
       name: 'notfound',

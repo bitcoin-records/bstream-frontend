@@ -51,7 +51,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/history">
             MY HISTORY
           </HeaderLink>
-          <HeaderLink to="/features">
+          <HeaderLink to="/userName">
             <RoundAvatar>
               <Avatar facebookId="100008343750912" size={25} /> 
             </RoundAvatar>
