@@ -19,8 +19,10 @@ import ReactAudioPlayer from 'react-audio-player'
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectSelectedTrack, makeSelectUser, makeSelectBStreamUser, makeSelectUserBalance } from './selectors';
+import { makeSelectSelectedTrack, makeSelectUser, makeSelectBStreamUser, makeSelectUserBalance, makeSelectIsTrackPlaying } from './selectors';
 import { socialLoginPrepare, socialLoginRequest, socialLoginSuccess, socialLoginFailure, socialLogout, startTrack, stopTrack } from './actions';
+import AnimatedCoin from './AnimatedCoin';
+import coinImg from './coin.png';
 
 const facebookAppId = '394516554261290';
 
@@ -53,7 +55,6 @@ const TrackLabel = styled.div`
   vertical-align: middle;
 `;
 
-
 const AlbumPreviewImg = styled(Img)`
   display: inline-block;
   vertical-align: middle;
@@ -62,7 +63,10 @@ const AlbumPreviewImg = styled(Img)`
 `;
 
 
-//class HomePage extends React.PureComponent 
+const CoinImg = styled(Img)`
+  width: 30px;
+  height: 30px;
+`;
 
 export class App extends React.PureComponent {
   
@@ -94,6 +98,9 @@ export class App extends React.PureComponent {
   render() {
     const props = this.props;
     const user = { ...this.props.user, balance: this.props.userBalance };
+    const coinAnimationStyle = {
+
+    };
     return (
       <AppWrapper>
         <Helmet
@@ -123,6 +130,11 @@ export class App extends React.PureComponent {
           </AudioPlayerBar>
         }
         {React.Children.toArray(props.children)}
+        {this.props.isTrackPlaying &&
+          <AnimatedCoin>
+            <CoinImg src={coinImg} />
+          </AnimatedCoin>
+        }
         <Footer />
       </AppWrapper>
     );
@@ -139,6 +151,7 @@ const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
   bStreamUser: makeSelectBStreamUser(),
   userBalance: makeSelectUserBalance(),
+  isTrackPlaying: makeSelectIsTrackPlaying(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
