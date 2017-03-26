@@ -49,10 +49,16 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/discover">
             DISCOVER
           </HeaderLink>
+          {this.props.user &&
           <HeaderLink to="/history">
             MY HISTORY
           </HeaderLink>
-          
+          }
+          {this.props.user &&
+          <HeaderLink to = '/playlist'>
+            Play List
+          </HeaderLink>
+          }
             {this.props.user &&
               <HeaderLink to="/userName">
                 <div>
