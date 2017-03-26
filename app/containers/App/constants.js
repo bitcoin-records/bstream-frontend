@@ -28,5 +28,7 @@ export const BSTREAM_REGISTER_ERROR = 'boilerplate/App/BSTREAM_REGISTER_ERROR';
 export const BSTREAM_TRACK_STREAM_REQUEST = 'boilerplate/App/BSTREAM_TRACK_STREAM_REQUEST';
 export const BSTREAM_TRACK_STREAM_SUCCESS = 'boilerplate/App/BSTREAM_TRACK_STREAM_SUCCESS';
 export const BSTREAM_TRACK_STREAM_ERROR = 'boilerplate/App/BSTREAM_TRACK_STREAM_ERROR';
+export const START_TRACK = 'boilerplate/App/START_TRACK';
+export const STOP_TRACK = 'boilerplate/App/STOP_TRACK';
 export const DEFAULT_LOCALE = 'en';
 

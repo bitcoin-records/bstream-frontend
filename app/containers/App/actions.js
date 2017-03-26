@@ -32,8 +32,10 @@ import {
   BSTREAM_REGISTER_SUCCESS,
   BSTREAM_REGISTER_ERROR,
   BSTREAM_TRACK_STREAM_REQUEST,
-  BSTREAM_TRACK_STREAM_SUCCESS,
+  BSTREAM_TRACK_STREAM_SUCCESS,  
   BSTREAM_TRACK_STREAM_ERROR,
+  START_TRACK,
+  STOP_TRACK,
 } from './constants';
 
 /**
@@ -130,7 +132,6 @@ export function socialLoginPrepare(service, options) {
 }
 
 export function socialLoginRequest(service, options) {
-  console.log('socialLoginRequest');
   return { type: SOCIAL_LOGIN_REQUEST, service, options };
 }
 
@@ -162,10 +163,18 @@ export function bstreamTrackStreamRequest(track) {
   return { type: BSTREAM_TRACK_STREAM_REQUEST, track };
 }
 
-export function bstreamTrackStreamSuccess(track) {
-  return { type: BSTREAM_TRACK_STREAM_SUCESSS, track };
+export function bstreamTrackStreamSuccess(opts) {
+  return { type: BSTREAM_TRACK_STREAM_SUCCESS, balance: opts.balance };
 }
 
 export function bstreamTrackStreamError(error) {
   return { type: BSTREAM_TRACK_STREAM_ERROR, error };
+}
+
+export function startTrack(track) {
+  return { type: START_TRACK, track };
+}
+
+export function stopTrack() {
+  return { type: STOP_TRACK };
 }

@@ -11,6 +11,7 @@
  */
 
 import { fromJS } from 'immutable';
+import _ from 'lodash';
 
 import {
   LOAD_REPOS_SUCCESS,
@@ -28,6 +29,8 @@ import {
   BSTREAM_TRACK_STREAM_REQUEST,
   BSTREAM_TRACK_STREAM_SUCCESS,
   BSTREAM_TRACK_STREAM_ERROR,
+  START_TRACK,
+  STOP_TRACK,
 } from './constants';
 
 // The initial state of the App
@@ -88,22 +91,30 @@ function appReducer(state = initialState, action) {
         .set('error', false);
     case BSTREAM_REGISTER_SUCCESS:
       return state
-        .set('bStreamUser', action.user);
+        .set('bStreamUser', action.user)
+        .set('userBalance', _.get(action.user, 'user.balance'));
     case BSTREAM_REGISTER_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);
     case BSTREAM_TRACK_STREAM_REQUEST:
       return state
-        .set('loading', true)
-        .set('error', false)
+        .set('trackStreamLoading', true)
+        .set('trackStreamError', false)
     case BSTREAM_TRACK_STREAM_SUCCESS:
       return state
-        .set('loading', false);
+        .set('trackStreamLoading', false)
+        .set('userBalance', action.balance);
     case BSTREAM_TRACK_STREAM_ERROR:
       return state
-        .set('error', action.error)
-        .set('loading', false);
+        .set('trackStreamError', action.error)
+        .set('trackStreamLoading', false);
+    case START_TRACK:
+      return state
+        .set('trackPlaying', true)
+    case STOP_TRACK:
+      return state
+        .set('trackPlaying', false)
     default:
       return state;
   }

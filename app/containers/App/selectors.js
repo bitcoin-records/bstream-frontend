@@ -21,6 +21,11 @@ const makeSelectBStreamUser = () => createSelector(
   (globalState) => globalState.get('bStreamUser')
 );
 
+const makeSelectUserBalance = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('userBalance')
+);
+
 const makeSelectSearchString = () => createSelector(
   selectGlobal,
   (globalState) => globalState.get('searchString')
@@ -56,6 +61,11 @@ const makeSelectRegisteringUser = () => createSelector(
   (globalState) => globalState.get('registeringUser')
 );
 
+const makeSelectIsTrackPlaying = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('trackPlaying')
+);
+
 const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -84,4 +94,6 @@ export {
   makeSelectLocationState,
   makeSelectRegisteringUser,
   makeSelectBStreamUser,
+  makeSelectUserBalance,
+  makeSelectIsTrackPlaying,
 };

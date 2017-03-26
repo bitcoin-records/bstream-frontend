@@ -19,8 +19,8 @@ import ReactAudioPlayer from 'react-audio-player'
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectSelectedTrack, makeSelectUser, makeSelectBStreamUser } from './selectors';
-import { socialLoginPrepare, socialLoginRequest, socialLoginSuccess, socialLoginFailure, socialLogout } from './actions';
+import { makeSelectSelectedTrack, makeSelectUser, makeSelectBStreamUser, makeSelectUserBalance } from './selectors';
+import { socialLoginPrepare, socialLoginRequest, socialLoginSuccess, socialLoginFailure, socialLogout, startTrack, stopTrack } from './actions';
 
 const facebookAppId = '394516554261290';
 
@@ -70,9 +70,30 @@ export class App extends React.PureComponent {
     this.props.prepareFacebook()
   }
 
+  onTrackPlay() {
+    console.log('onTrackPlay');
+    this.props.startTrack(this.props.selectedTrack);
+  }
+
+  onTrackPause() {
+    console.log('onTrackPause');
+    this.props.stopTrack();
+  }
+
+  onTrackEnded() {
+    console.log('onTrackEnded');
+    this.props.stopTrack();
+  }
+
+  onTrackAbort() {
+    console.log('onTrackAborted');
+    this.props.stopTrack();
+  }
+
+
   render() {
     const props = this.props;
-    const user = { ...this.props.user, balance: _.get(this.props.bStreamUser, 'balance')};
+    const user = { ...this.props.user, balance: this.props.userBalance };
     return (
       <AppWrapper>
         <Helmet
@@ -86,9 +107,14 @@ export class App extends React.PureComponent {
         {props.selectedTrack &&
           <AudioPlayerBar>
             <AudioPlayerBarInner>
-              <ReactAudioPlayer id="musicPlayer"
+              <ReactAudioPlayer 
+                id="musicPlayer"
                 src={_.get(props.selectedTrack, 'preview_url')}
                 autoPlay
+                onPlay={() => (this.onTrackPlay())}
+                onPause={() => (this.onTrackPause())}
+                onEnded={() => (this.onTrackEnded())}
+                onAbort={() => (this.onTrackAbort())}
               /> <TrackInfo>
                 <AlbumPreviewImg src={_.get(props.selectedTrack, 'album.images[0].url')} />
                 <TrackLabel>{_.get(props.selectedTrack, 'name')} - {_.get(props.selectedTrack, 'artists[0].name')}</TrackLabel>
@@ -112,12 +138,15 @@ const mapStateToProps = createStructuredSelector({
   selectedTrack: makeSelectSelectedTrack(),
   user: makeSelectUser(),
   bStreamUser: makeSelectBStreamUser(),
+  userBalance: makeSelectUserBalance(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   prepareFacebook: () => dispatch(socialLoginPrepare('facebook', { appId: facebookAppId })),
   loginFacebook: () => dispatch(socialLoginRequest('facebook')),
-  logout: () => dispatch(socialLogout())
+  logout: () => dispatch(socialLogout()),
+  startTrack: (track) => dispatch(startTrack(track)),
+  stopTrack: () => dispatch(stopTrack()),
 })
 
 // export default withProgressBar(App);

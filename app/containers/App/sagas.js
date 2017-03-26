@@ -1,4 +1,5 @@
-import { take, put, call, fork } from 'redux-saga/effects'
+import { take, put, call, fork, select } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 import { push } from 'react-router-redux';
 import { 
           socialLoginPrepare, 
@@ -9,9 +10,18 @@ import {
           bstreamRegisterRequest,
           bstreamRegisterSuccess,
           bstreamRegisterError,
+          bstreamTrackStreamRequest,
+          bstreamTrackStreamSuccess,
+          bstreamTrackStreamError
        } from './actions'
-import { SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_LOGIN_SUCCESS, SOCIAL_LOGIN_FAILURE, SOCIAL_LOGOUT, BSTREAM_REGISTER_REQUEST } from './constants'
-import { makeSelectRegisteringUser } from 'containers/App/selectors';
+import { SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_LOGIN_SUCCESS, SOCIAL_LOGIN_FAILURE, SOCIAL_LOGOUT, 
+          BSTREAM_REGISTER_REQUEST, BSTREAM_TRACK_STREAM_REQUEST, BSTREAM_TRACK_STREAM_SUCCESS, BSTREAM_TRACK_STREAM_ERROR,
+          START_TRACK, STOP_TRACK } from './constants'
+import { makeSelectRegisteringUser, makeSelectUser, makeSelectBStreamUser, makeSelectIsTrackPlaying, makeSelectSelectedTrack } from 'containers/App/selectors';
+
+const ONE_SECOND = 1000;
+const Promise = this.Promise || require('promise');
+const agent = require('superagent-promise')(require('superagent'), Promise);
 
 export const promises = {
   fbLogin: (options) => new Promise((resolve, reject) => {
@@ -119,10 +129,41 @@ export function* watchBStreamRegister () {
   }
 }
 
+export function* trackStream() {
+  try {
+    const selectedTrack = yield select(makeSelectSelectedTrack());
+    const bStreamUser = yield select(makeSelectBStreamUser());
+    const data = {
+      username: bStreamUser.user.username,
+      trackPrice: 0.001,
+      artist: 'artist1',
+    };
+    const req = () => agent.post('http://localhost:5000/track-stream', data).end();
+    const response = yield call(req);
+    yield put(bstreamTrackStreamSuccess({ balance: response.body.balance }))
+  } catch (e) {
+    console.error(e);
+    yield put(bstreamTrackStreamError({ error: e }))
+  }
+}
+
 export function* rootSaga() {
   // const watcher = yield takeLatest(BSTREAM_REGISTER_REQUEST, registerUser);
   yield fork(watchSocialLoginFacebook)
-  //yield fork(watchBStreamRegister)
+
+  while(yield take(START_TRACK)) {
+    while(true) {
+      yield call(delay, 1000);
+      const isTrackPlaying = yield select(makeSelectIsTrackPlaying());
+      if (isTrackPlaying) {
+        const selectedTrack = yield select(makeSelectSelectedTrack());
+        yield trackStream();
+        //yield put(bstreamTrackStreamRequest({ track: selectedTrack }))
+      } else {
+        break;
+      }
+    }
+  }
 
 }
 
