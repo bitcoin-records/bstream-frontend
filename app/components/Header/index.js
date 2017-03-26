@@ -48,7 +48,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/discover">
             DISCOVER
           </HeaderLink>
-          <HeaderLink to="/features">
+          <HeaderLink to="/history">
             MY HISTORY
           </HeaderLink>
           <HeaderLink to="/features">

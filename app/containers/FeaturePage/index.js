@@ -24,6 +24,7 @@ export default class FeaturePage extends React.Component { // eslint-disable-lin
   render() {
     return (
       <div>
+      <h1>goodman</h1>
         <Helmet
           title="Feature Page"
           meta={[
