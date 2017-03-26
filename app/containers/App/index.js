@@ -11,6 +11,7 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
 import Header from 'components/Header';
+import Img from 'components/Img';
 import Footer from 'components/Footer';
 import withProgressBar from 'components/ProgressBar';
 import _ from 'lodash';
@@ -27,6 +28,36 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
+const AudioPlayerBar = styled.div`
+  border-top: 1px solid #ccc;
+  position: relative;
+  padding: 10px 20px;
+  text-align: center;
+`;
+
+const AudioPlayerBarInner = styled.div`
+  max-width: 960px;
+`;
+
+const TrackInfo = styled.div`
+  display: inline-block;
+  margin-left: 30px;
+`;
+
+const TrackLabel = styled.div`
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+`;
+
+
+const AlbumPreviewImg = styled(Img)`
+  display: inline-block;
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+`;
+
 
 
 export function App(props) {
@@ -41,10 +72,19 @@ export function App(props) {
         ]}
       />
       <Header />
-      <ReactAudioPlayer id="musicPlayer"
-        src={_.get(props.selectedTrack, 'preview_url')}
-        autoPlay
-      />
+      {props.selectedTrack &&
+        <AudioPlayerBar>
+          <AudioPlayerBarInner>
+            <ReactAudioPlayer id="musicPlayer"
+              src={_.get(props.selectedTrack, 'preview_url')}
+              autoPlay
+            /> <TrackInfo>
+              <AlbumPreviewImg src={_.get(props.selectedTrack, 'album.images[0].url')} />
+              <TrackLabel>{_.get(props.selectedTrack, 'name')} - {_.get(props.selectedTrack, 'artists[0].name')}</TrackLabel>
+            </TrackInfo>
+          </AudioPlayerBarInner>
+        </AudioPlayerBar>
+      }
       {React.Children.toArray(props.children)}
       <Footer />
     </AppWrapper>
