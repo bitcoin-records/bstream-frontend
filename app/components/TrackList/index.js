@@ -7,6 +7,7 @@ import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import styled from 'styled-components';
 import _ from 'lodash';
+import waveIconImg from './icon-audiowave.png';
 
 const TrackItem = styled.div`
   background: white;
@@ -14,7 +15,7 @@ const TrackItem = styled.div`
   justify-content: space-between;
   width: 200px;
   margin: 5px;
-  height: 360px;
+  height: 320px;
   vertical-align: middle;
   box-shadow: 0px 2px 1px #888888;
   position: relative;
@@ -39,15 +40,20 @@ const ArtistLabel = styled.span`
 `;
 
 
-const PriceLabel = styled.div`
-  color: green;
-  font-weight: 800;
-  font-size: 18px;
+const StreamButton = styled.button`
+  background-color: #41ADDD;
+  color: white;
+  font-size: 14px;
   position: absolute;
+  padding: 10px;
   bottom: 10px;
   right: 10px;
+  border-radius: 5px;
 `;
 
+const StreamingButtonImg = styled(Img)`
+  height: 20px;
+`;
 
 
 
@@ -71,7 +77,7 @@ function TrackList({ loading, error, tracks, onTrackSelected }) {
           <SongInfo>
             <SongTitleLabel>{track.name}</SongTitleLabel><br />
             <ArtistLabel>{_.get(track, 'artists.[0].name')}</ArtistLabel>
-            <PriceLabel>¢5</PriceLabel>
+            <StreamButton><StreamingButtonImg src={waveIconImg} /> Stream for ¢5</StreamButton>
           </SongInfo>
         </TrackItem>
       ))}

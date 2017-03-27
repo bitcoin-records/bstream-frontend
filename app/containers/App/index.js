@@ -131,9 +131,17 @@ export class App extends React.PureComponent {
         }
         {React.Children.toArray(props.children)}
         {this.props.isTrackPlaying &&
-          <AnimatedCoin>
-            <CoinImg src={coinImg} />
-          </AnimatedCoin>
+          <div>
+            <AnimatedCoin style={{ animationDelay: '0.1s' }}>
+              <CoinImg src={coinImg} />
+            </AnimatedCoin>
+            <AnimatedCoin style={{ animationDelay: '0.3s' }}>
+              <CoinImg src={coinImg} />
+            </AnimatedCoin>
+            <AnimatedCoin style={{ animationDelay: '0.5s' }}>
+              <CoinImg src={coinImg} />
+            </AnimatedCoin>
+          </div>
         }
         <Footer />
       </AppWrapper>

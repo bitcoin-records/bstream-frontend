@@ -81,11 +81,11 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
             </CenteredSection>
           }
           <CenteredSection>
-            <label>Your Wallet</label><br />
+            <label>Your Id would be</label><br />
             <Input
                 id="username"
                 type="text"
-                placeholder="1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                placeholder="your id"
                 value={this.props.username}
                 onChange={this.props.onChangeUserWalletId}
               />

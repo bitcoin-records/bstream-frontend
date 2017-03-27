@@ -7,11 +7,21 @@ import HeaderLink from './HeaderLink';
 import messages from './messages';
 import styled from 'styled-components';
 import Img from 'components/Img';
+import logoImg from './logo.png';
 
 const UserImg = styled(Img)`
   width: 25px;
   height: 25px;
   border-radius: 10px;
+`;
+
+const LogoImg = styled(Img)`
+  height: 30px;
+  width: auto;
+`;
+
+const LogoHeaderLink = styled(HeaderLink)`
+  margin-top: 15px;
 `;
 
 const UserIdentity = styled.span`
@@ -44,9 +54,9 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
         </A>
         */}
         <NavBar>
-          <HeaderLink to="/">
-            HOME
-          </HeaderLink>
+          <LogoHeaderLink to="/">
+            <LogoImg src={logoImg} />
+          </LogoHeaderLink>
           <HeaderLink to="/discover">
             DISCOVER
           </HeaderLink>

@@ -135,8 +135,8 @@ export function* trackStream() {
     const bStreamUser = yield select(makeSelectBStreamUser());
     const data = {
       username: bStreamUser.user.username,
-      trackPrice: 0.001,
-      artist: 'artist1',
+      trackPrice: 0.0001,
+      artist: 'bitnickelback',
     };
     const req = () => agent.post('http://localhost:5000/track-stream', data).end();
     const response = yield call(req);
